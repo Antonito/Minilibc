@@ -5,19 +5,43 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:42:39 2017 Antoine Baché
-** Last update Mon Feb 27 11:42:52 2017 Antoine Baché
+** Last update Wed Mar 01 16:54:45 2017 troncy_l
 */
 
 #include "minilibc_test.h"
 
 void		test_strstr(t_functions * const tests)
 {
+  char		*haystack = "Bonjour cacao j'aime les ...";
+  char		*needle = "cacao";
+  char		*res;
+  char		*real_res;
+
+  res = tests[STRSTR].minilibc(haystack, needle);
+  real_res = tests[STRSTR].minilibc(haystack, needle);
+  printf("%s: Libc[%c] MiniLibC[%c] %s\n", tests[STRSTR].name, *real_res, *res, (res != real_res) ? KO : OK );
 }
 
 void		test_strpbrk(t_functions * const tests)
 {
+  char		*s = "0123456789ABCDEF";
+  char		*reject = "45";
+  char		*res;
+  char		*real_res;
+
+  res = tests[STRPBRK].minilibc(s, reject);
+  real_res = strpbrk(s, reject);
+  printf("%s: Libc[%c] MiniLibC[%c] %s\n", tests[STRPBRK].name, *real_res, *res, (res != real_res) ? KO : OK );
 }
 
 void		test_strcspn(t_functions * const tests)
 {
+  char		*s = "0123456789ABCDEF";
+  char		*reject = "45";
+  size_t	res;
+  size_t	real_res;
+
+  res = tests[STRCSPN].minilibc(s, reject);
+  real_res = strcspn(s, reject);
+  printf("%s: %s\n", tests[STRCSPN].name, (res != real_res) ? KO : OK );
 }

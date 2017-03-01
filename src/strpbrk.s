@@ -4,9 +4,31 @@
 		global strpbrk
 
 strpbrk:
-%warning "To code !"
+	xor rdx, rdx		; Set rdx to 0
+_strpbrk_s_loop_start:
+	cmp byte [rdi + rdx], 0
+	je _strpbrk_s_loop_end
+	jmp _strpbrk_accept_loop_init
+_strpbrk_s_loop_inc:
+	inc rdx
+	jmp _strpbrk_s_loop_start
+_strpbrk_s_loop_end:
+	xor rax, rax		; Set return value
 	ret
 
+_strpbrk_accept_loop_init:
+	xor rcx, rcx		; Set rcx to 0
+_strpbrk_accept_loop_start:
+	cmp byte [rsi + rcx], 0
+	je _strpbrk_s_loop_inc	; increment count (first loop) and continue
+	mov r8b, [rdi + rdx]
+	cmp byte [rsi + rcx], r8b
+	je _strpbrk_accept_loop_end
+	inc rcx
+	jmp _strpbrk_accept_loop_start
+_strpbrk_accept_loop_end:
+	mov rax, rsi
+	ret
 %elifidn __OUTPUT_FORMAT__, elf32
 		[BITS 32]
 		section .text
