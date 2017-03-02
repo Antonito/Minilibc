@@ -5,9 +5,10 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:42:39 2017 Antoine Baché
-** Last update Thu Mar  2 18:40:34 2017 Antoine Baché
+** Last update Thu Mar  2 18:44:48 2017 Antoine Baché
 */
 
+#include <stdio.h>
 #include "minilibc_test.h"
 
 void		test_strstr(t_functions * const tests)
@@ -67,9 +68,10 @@ void		test_strcspn(t_functions * const tests)
     {
       if (setjmp(jbuf) == 0)
 	{
-	  res = tests[STRCSPN].minilibc(s[i], reject[i]);
+	  res = (uintptr_t)tests[STRCSPN].minilibc(s[i], reject[i]);
 	  real_res = strcspn(s[i], reject[i]);
-	  printf("%s: %s\n", tests[STRCSPN].name, (res != real_res) ? KO : OK);
+	  printf("%s: Libc[%lu] MiniLibC[%lu] %s\n", tests[STRCSPN].name,
+		 real_res, res, (res != real_res) ? KO : OK);
 	}
       ++i;
     }
