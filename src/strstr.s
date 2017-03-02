@@ -4,29 +4,29 @@
 		global strstr
 
 strstr:
-	xor rdx, rdx
+	xor rdx, rdx			; set haystck counter to 0
 _strstr_haystack_loop_start:
-	mov byte al, [rdi + rdx]
-	cmp al, 0
-	je _strstr_haystack_loop_end
-	cmp al, sil
+	mov byte al, [rdi + rdx]	; get haystack char into al
+	cmp al, 0			; if we reach the end
+	je _strstr_haystack_loop_end	; the end, we did not find needle
+	cmp byte al, [rsi]		; if haystack[i] == needle[0]
 	je _strstr_needle_loop_init
-	inc rdx
+	inc rdx				; inc haystack counter
 	jmp _strstr_haystack_loop_start
 _strstr_haystack_loop_end:
-	xor rax, rax
+	xor rax, rax			; return NULL
 	ret
 
 _strstr_needle_loop_init:
-	xor rcx, rcx
+	xor rcx, rcx			; set needle counter to 0
 _strstr_needle_loop_start:
-	mov byte r9b, [rsi + rcx]
-	cmp r9b, 0x0			;check if we reach "needle" end
+	mov byte r9b, [rsi + rcx]	; get needle char into r9b
+	cmp r9b, 0x0			; check if we reach "needle" end
 	je _strstr_needle_loop_end
-	mov r10, [rdx + rcx]
-	mov r11, [rdi + r10]		;actual char of "haystack"
-	mov byte r8b, [r11]
-	cmp r8b, 0			;check if we reach "haystack" end
+	mov r10, rdx
+	add r10, rcx
+	mov byte r8b, [rdi + r10]	; actual char of "haystack"
+	cmp r8b, 0			; check if we reach "haystack" end
 	je _strstr_needle_loop_end
 	cmp r8b, r9b
 	jne _strstr_haystack_loop_start
