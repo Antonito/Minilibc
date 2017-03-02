@@ -5,7 +5,7 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:42:39 2017 Antoine Baché
-** Last update Thu Mar 02 19:22:41 2017 troncy_l
+** Last update Thu Mar  2 20:27:00 2017 Antoine Baché
 */
 
 #include <stdio.h>
@@ -23,11 +23,14 @@ void		test_strstr(t_functions * const tests)
   i = 0;
   while (i < 5)
     {
-      res = tests[STRSTR].minilibc(haystack[i], needle[i]);
-      real_res = strstr(haystack[i], needle[i]);
-      printf("%s: Libc[%s] MiniLibC[%s] %s\n",
-	     tests[STRSTR].name, real_res, res,
-	     (res != real_res) ? KO : OK);
+      if (setjmp(jbuf) == 0)
+	{
+	  res = tests[STRSTR].minilibc(haystack[i], needle[i]);
+	  real_res = strstr(haystack[i], needle[i]);
+	  printf("%s: Libc[%s] MiniLibC[%s] %s\n",
+		 tests[STRSTR].name, real_res, res,
+		 (res != real_res) ? KO : OK);
+	}
       ++i;
     }
 }

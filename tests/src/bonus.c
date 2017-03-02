@@ -5,9 +5,10 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:43:34 2017 Antoine Baché
-** Last update Thu Mar  2 18:39:19 2017 Antoine Baché
+** Last update Thu Mar  2 20:58:44 2017 Antoine Baché
 */
 
+#define _GNU_SOURCE
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -20,10 +21,13 @@ void		test_rawmemchr(t_functions * const tests)
   uintptr_t	ret_minilibc;
 
   arr[200] = 0x23;
-  ret_libc = (uintptr_t)tests[RAWMEMCHR].libc(arr, 0x23);
-  ret_minilibc = (uintptr_t)tests[RAWMEMCHR].minilibc(arr, 0x23);
-  printf("%s: Libc[%lu] MiniLibC[%lu]: %s\n", tests[RAWMEMCHR].name,
-	 ret_libc, ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK);
+  if (setjmp(jbuf) == 0)
+    {
+      ret_libc = (uintptr_t)tests[RAWMEMCHR].libc(arr, 0x23);
+      ret_minilibc = (uintptr_t)tests[RAWMEMCHR].minilibc(arr, 0x23);
+      printf("%s: Libc[%lu] MiniLibC[%lu]: %s\n", tests[RAWMEMCHR].name,
+	     ret_libc, ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK);
+    }
 }
 
 void		test_memchr(t_functions * const tests)
@@ -33,15 +37,18 @@ void		test_memchr(t_functions * const tests)
   uintptr_t	ret_minilibc;
 
   memset(arr, 0x00, sizeof(arr));
-  ret_libc = (uintptr_t)tests[MEMCHR].libc(arr, 0x23, sizeof(arr));
-  ret_minilibc = (uintptr_t)tests[MEMCHR].minilibc(arr, 0x23, sizeof(arr));
-  printf("%s: Libc[%lu] MiniLibC[%lu]: %s\n", tests[MEMCHR].name,
-	 ret_libc, ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK);
-  arr[200] = 0x23;
-  ret_libc = (uintptr_t)tests[MEMCHR].libc(arr, 0x23, sizeof(arr));
-  ret_minilibc = (uintptr_t)tests[MEMCHR].minilibc(arr, 0x23, sizeof(arr));
-  printf("%s: Libc[%lu] MiniLibC[%lu]: %s\n", tests[MEMCHR].name,
-	 ret_libc, ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK);
+  if (setjmp(jbuf) == 0)
+    {
+      ret_libc = (uintptr_t)tests[MEMCHR].libc(arr, 0x23, sizeof(arr));
+      ret_minilibc = (uintptr_t)tests[MEMCHR].minilibc(arr, 0x23, sizeof(arr));
+      printf("%s: Libc[%lu] MiniLibC[%lu]: %s\n", tests[MEMCHR].name,
+	     ret_libc, ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK);
+      arr[200] = 0x23;
+      ret_libc = (uintptr_t)tests[MEMCHR].libc(arr, 0x23, sizeof(arr));
+      ret_minilibc = (uintptr_t)tests[MEMCHR].minilibc(arr, 0x23, sizeof(arr));
+      printf("%s: Libc[%lu] MiniLibC[%lu]: %s\n", tests[MEMCHR].name,
+	     ret_libc, ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK);
+    }
 }
 
 /*
@@ -56,20 +63,23 @@ void		test_memcmp(t_functions * const tests)
 
   memset(arr, 0xFF, sizeof(arr));
   memset(arr2, 0xFF, sizeof(arr2));
-  ret_libc = (uintptr_t)tests[MEMCMP].libc(arr, arr2, sizeof(arr));
-  ret_minilibc = (uintptr_t)tests[MEMCMP].minilibc(arr, arr2, sizeof(arr));
-  printf("%s: Libc[%d] MiniLibC[%d]: %s\n", tests[MEMCMP].name,
-	 ret_libc, ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK);
-  arr[255] = 0xAB;
-  ret_libc = (uintptr_t)tests[MEMCMP].libc(arr, arr2, sizeof(arr));
-  ret_minilibc = (uintptr_t)tests[MEMCMP].minilibc(arr, arr2, sizeof(arr));
-  printf("%s:  Libc[%d] MiniLibC[%d]: %s\n", tests[MEMCMP].name,
-	 ret_libc, ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK);
-  arr[3] = 0;
-  ret_libc = (uintptr_t)tests[MEMCMP].libc(arr, arr2, sizeof(arr));
-  ret_minilibc = (uintptr_t)tests[MEMCMP].minilibc(arr, arr2, sizeof(arr));
-  printf("%s: Libc[%d] MiniLibC[%d]: %s\n", tests[MEMCMP].name,
-	 ret_libc , ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK);
+  if (setjmp(jbuf) == 0)
+    {
+      ret_libc = (uintptr_t)tests[MEMCMP].libc(arr, arr2, sizeof(arr));
+      ret_minilibc = (uintptr_t)tests[MEMCMP].minilibc(arr, arr2, sizeof(arr));
+      printf("%s: Libc[%d] MiniLibC[%d]: %s\n", tests[MEMCMP].name,
+	     ret_libc, ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK);
+      arr[255] = 0xAB;
+      ret_libc = (uintptr_t)tests[MEMCMP].libc(arr, arr2, sizeof(arr));
+      ret_minilibc = (uintptr_t)tests[MEMCMP].minilibc(arr, arr2, sizeof(arr));
+      printf("%s:  Libc[%d] MiniLibC[%d]: %s\n", tests[MEMCMP].name,
+	     ret_libc, ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK);
+      arr[3] = 0;
+      ret_libc = (uintptr_t)tests[MEMCMP].libc(arr, arr2, sizeof(arr));
+      ret_minilibc = (uintptr_t)tests[MEMCMP].minilibc(arr, arr2, sizeof(arr));
+      printf("%s: Libc[%d] MiniLibC[%d]: %s\n", tests[MEMCMP].name,
+	     ret_libc , ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK);
+    }
 }
 
 void		test_strnlen(t_functions * const tests)
@@ -124,4 +134,20 @@ void		test_exit(t_functions * const tests)
   printf("Should exit");
   tests[EXIT].minilibc(9);
   printf("Ce message ne devrait pas apparaitre.\n");
+}
+
+void		test_memfrob(t_functions * const tests)
+{
+  char		buff[256];
+  char		buff2[256];
+
+  if (setjmp(jbuf) == 0)
+    {
+      memset(buff, 0x72, sizeof(buff));
+      memset(buff2, 0x72, sizeof(buff2));
+      memfrob(buff, sizeof(buff));
+      tests[MEMFROB].minilibc(buff2, sizeof(buff2));
+      printf("%s: %s\n", tests[MEMFROB].name,
+	     (!memcmp(buff, buff2, sizeof(buff))) ? OK : KO);
+    }
 }

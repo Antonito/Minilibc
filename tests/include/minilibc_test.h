@@ -5,13 +5,15 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:41:27 2017 Antoine Baché
-** Last update Thu Mar  2 18:33:15 2017 Antoine Baché
+** Last update Thu Mar  2 20:41:14 2017 Antoine Baché
 */
 
 #ifndef MINILIBC_TEST_H_
 #define MINILIBC_TEST_H_
 
+#define _GNU_SOURCE
 #include <setjmp.h>
+#include <string.h>
 #include "debug.h"
 #include "minilibc.h"
 
@@ -39,6 +41,7 @@ typedef enum	e_func_list
     STRNLEN,
     WRITE,
     SLEEP,
+    MEMFROB,
     EXIT,
     RAWMEMCHR,
     LAST_FUNC
@@ -75,6 +78,8 @@ void		test_memcmp(t_functions *);
 void		test_strnlen(t_functions *);
 void		test_write(t_functions *);
 void		test_sleep(t_functions *);
+void		test_memfrob(t_functions *);
+void		test_rawmemchr(t_functions *);
 void		test_exit(t_functions *);
 
 #endif /* ! MINILIBC_TEST_H_ */

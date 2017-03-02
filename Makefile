@@ -34,6 +34,7 @@ BONUS_DIR=	./bonus/
 
 BONUS_FILES=	memchr.s	\
 		memcmp.s	\
+		memfrob.s	\
 		strnlen.s	\
 		sleep.s		\
 		syscall.s	\

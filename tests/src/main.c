@@ -5,9 +5,10 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:44:12 2017 Antoine Baché
-** Last update Thu Mar  2 18:38:38 2017 Antoine Baché
+** Last update Thu Mar  2 21:00:32 2017 Antoine Baché
 */
 
+#define _GNU_SOURCE
 #include <dlfcn.h>
 #include <stdio.h>
 #include <string.h>
@@ -50,6 +51,7 @@ static t_functions	tests[] =
     {NULL, (void *(*)())strnlen, NULL, strings},
     {NULL, (void *(*)())write, NULL, NULL},
     {NULL, (void *(*)())sleep, NULL, NULL},
+    {NULL, (void *(*)())memfrob, NULL, NULL},
     {NULL, (void *(*)())exit, NULL, NULL},
     {NULL, (void *(*)())rawmemchr, NULL, NULL},
     {NULL, NULL, NULL, NULL}
@@ -65,10 +67,13 @@ void		test_strchr()
   i = 0;
   while (strings[i])
     {
-      ret_libc = tests[STRCHR].libc(strings[i], locate[i]);
-      ret_minilibc = tests[STRCHR].minilibc(strings[i], locate[i]);
-      printf("%s: Libc[%p] MiniLibC[%p]: %s\n", tests[STRCHR].name,
-	     ret_libc, ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK);
+      if (setjmp(jbuf) == 0)
+	{
+	  ret_libc = tests[STRCHR].libc(strings[i], locate[i]);
+	  ret_minilibc = tests[STRCHR].minilibc(strings[i], locate[i]);
+	  printf("%s: Libc[%p] MiniLibC[%p]: %s\n", tests[STRCHR].name,
+		 ret_libc, ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK);
+	}
       ++i;
     }
 }
@@ -79,7 +84,8 @@ int			load_symbols(void * const file)
   static const char	*symbols[] =
     {"memcpy", "memmove", "memset", "strchr", "strcmp", "strlen",
      "strncmp", "rindex", "strcasecmp", "strstr", "strpbrk", "strcspn",
-     "memchr", "memcmp", "strnlen", "write", "sleep", "exit", "rawmemchr",
+     "memchr", "memcmp", "strnlen", "write", "sleep", "memfrob",
+     "exit", "rawmemchr",
      NULL};
 
   i = 0;
@@ -135,6 +141,7 @@ int			main(int ac, char **av, char **env)
   test_strnlen(tests);
   test_write(tests);
   test_sleep(tests);
+  test_memfrob(tests);
   test_rawmemchr(tests);
   test_exit(tests);
   return (EXIT_SUCCESS);

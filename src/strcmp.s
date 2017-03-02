@@ -39,6 +39,7 @@ _strcmp_signed:
 		section .text
 		global strcmp
 strcmp:
+ret
 	push ebp
 	mov ebp, esp
 	mov eax, [ebp + 8]
