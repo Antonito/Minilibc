@@ -27,7 +27,8 @@ _strpbrk_accept_loop_start:
 	inc rcx
 	jmp _strpbrk_accept_loop_start
 _strpbrk_accept_loop_end:
-	mov rax, rsi
+	mov rax, rdi
+	add rax, rdx
 	ret
 %elifidn __OUTPUT_FORMAT__, elf32
 		[BITS 32]

@@ -5,7 +5,7 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:42:39 2017 Antoine Baché
-** Last update Thu Mar 02 16:34:25 2017 troncy_l
+** Last update Thu Mar 02 17:22:21 2017 troncy_l
 */
 
 #include "minilibc_test.h"
@@ -25,7 +25,7 @@ void		test_strstr(t_functions * const tests)
 void		test_strpbrk(t_functions * const tests)
 {
   char		*s = "0123456789ABCDEF";
-  char		*reject = "45";
+  char		*reject = "F5";
   char		*res;
   char		*real_res;
 
