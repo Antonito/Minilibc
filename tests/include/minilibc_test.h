@@ -5,17 +5,20 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:41:27 2017 Antoine Baché
-** Last update Mon Feb 27 11:41:39 2017 Antoine Baché
+** Last update Thu Mar  2 18:33:15 2017 Antoine Baché
 */
 
 #ifndef MINILIBC_TEST_H_
 #define MINILIBC_TEST_H_
 
+#include <setjmp.h>
 #include "debug.h"
 #include "minilibc.h"
 
 #define OK	GREEN_BOLD_INTENS"OK"CLEAR
 #define KO	RED_BOLD_INTENS"KO"CLEAR
+
+extern jmp_buf	jbuf;
 
 typedef enum	e_func_list
   {

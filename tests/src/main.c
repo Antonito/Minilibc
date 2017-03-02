@@ -5,7 +5,7 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:44:12 2017 Antoine Baché
-** Last update Mon Feb 27 11:55:52 2017 Antoine Baché
+** Last update Thu Mar  2 18:38:38 2017 Antoine Baché
 */
 
 #include <dlfcn.h>
@@ -15,7 +15,10 @@
 #include <assert.h>
 #include <unistd.h>
 #include <strings.h>
+#include <signal.h>
 #include "minilibc_test.h"
+
+jmp_buf			jbuf;
 
 static char		*strings[] =
   {
@@ -93,6 +96,14 @@ int			load_symbols(void * const file)
   return (EXIT_SUCCESS);
 }
 
+void		sigsev_handler(int sig)
+{
+  (void)sig;
+  printf(RED"Segfault !\n"CLEAR);
+  signal(SIGSEGV, sigsev_handler);
+  longjmp(jbuf, 1);
+}
+
 int			main(int ac, char **av, char **env)
 {
   void			*file;
@@ -100,6 +111,7 @@ int			main(int ac, char **av, char **env)
   (void)ac;
   (void)av;
   (void)env;
+  signal(SIGSEGV, sigsev_handler);
   file = dlopen("./libasm.so", RTLD_NOW);
   if (!file || load_symbols(file))
     {

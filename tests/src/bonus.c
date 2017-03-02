@@ -5,7 +5,7 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:43:34 2017 Antoine Baché
-** Last update Mon Feb 27 11:43:52 2017 Antoine Baché
+** Last update Thu Mar  2 18:39:19 2017 Antoine Baché
 */
 
 #include <string.h>
@@ -111,8 +111,11 @@ void		test_sleep(t_functions * const tests)
 {
   printf("sleep: Waiting 1sec [libc]\n");
   tests[SLEEP].libc(1);
-  printf("sleep: Waiting 1sec [minilibc]\n");
-  tests[SLEEP].minilibc(1);
+  if (setjmp(jbuf) == 0)
+    {
+      printf("sleep: Waiting 1sec [minilibc]\n");
+      tests[SLEEP].minilibc(1);
+    }
   printf("sleep: Done\n");
 }
 
