@@ -5,6 +5,10 @@
 
 strpbrk:
 	xor rdx, rdx		; Set rdx to 0
+	cmp byte [rdi], 0
+	je _strpbrk_s_loop_end
+	cmp byte [rsi], 0
+	je _strpbrk_s_loop_end
 _strpbrk_s_loop_start:
 	cmp byte [rdi + rdx], 0
 	je _strpbrk_s_loop_end
@@ -21,8 +25,8 @@ _strpbrk_accept_loop_init:
 _strpbrk_accept_loop_start:
 	cmp byte [rsi + rcx], 0
 	je _strpbrk_s_loop_inc	; increment count (first loop) and continue
-	mov r8b, [rdi + rdx]
-	cmp byte [rsi + rcx], r8b
+	mov byte r8b, [rdi + rdx]
+	cmp byte r8b, [rsi + rcx]
 	je _strpbrk_accept_loop_end
 	inc rcx
 	jmp _strpbrk_accept_loop_start

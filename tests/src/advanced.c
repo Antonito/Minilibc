@@ -5,7 +5,7 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:42:39 2017 Antoine Baché
-** Last update Thu Mar  2 18:44:48 2017 Antoine Baché
+** Last update Thu Mar 02 19:22:41 2017 troncy_l
 */
 
 #include <stdio.h>
@@ -47,8 +47,8 @@ void		test_strpbrk(t_functions * const tests)
 	{
 	  res = tests[STRPBRK].minilibc(s[i], reject[i]);
 	  real_res = strpbrk(s[i], reject[i]);
-	  printf("%s: Libc[%c] MiniLibC[%c] %s\n",
-		 tests[STRPBRK].name, *real_res, *res,
+	  printf("%s: Libc[%s] MiniLibC[%s] %s\n",
+		 tests[STRPBRK].name, real_res, res,
 		 (res != real_res) ? KO : OK);
 	}
       ++i;

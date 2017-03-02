@@ -13,7 +13,7 @@ _strcspn_s_loop_inc:
 	inc rdx
 	jmp _strcspn_s_loop_start
 _strcspn_s_loop_end:
-	xor rax, rax		; Set return value
+	mov rax, rdx		; Set return value
 	ret
 
 _strcspn_reject_loop_init:

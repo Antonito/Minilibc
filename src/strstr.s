@@ -5,6 +5,10 @@
 
 strstr:
 	xor rdx, rdx			; set haystck counter to 0
+	cmp byte [rsi], 0
+	je _strstr_return_haystack
+	cmp byte [rdi], 0
+	je _strstr_haystack_loop_end
 _strstr_haystack_loop_start:
 	mov byte al, [rdi + rdx]	; get haystack char into al
 	cmp al, 0			; if we reach the end
@@ -14,7 +18,11 @@ _strstr_haystack_loop_start:
 	inc rdx				; inc haystack counter
 	jmp _strstr_haystack_loop_start
 _strstr_haystack_loop_end:
-	xor rax, rax			; return NULL
+	xor rax, rax			; return haystack
+	ret
+
+_strstr_return_haystack:
+	mov rax, rdi
 	ret
 
 _strstr_needle_loop_init:
