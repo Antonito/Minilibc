@@ -5,7 +5,7 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:42:39 2017 Antoine Baché
-** Last update Wed Mar 01 16:54:45 2017 troncy_l
+** Last update Thu Mar 02 16:34:25 2017 troncy_l
 */
 
 #include "minilibc_test.h"
@@ -18,8 +18,8 @@ void		test_strstr(t_functions * const tests)
   char		*real_res;
 
   res = tests[STRSTR].minilibc(haystack, needle);
-  real_res = tests[STRSTR].minilibc(haystack, needle);
-  printf("%s: Libc[%c] MiniLibC[%c] %s\n", tests[STRSTR].name, *real_res, *res, (res != real_res) ? KO : OK );
+  real_res = strstr(haystack, needle);
+  printf("%s: Libc[%s] MiniLibC[%s] %s\n", tests[STRSTR].name, real_res, res, (res != real_res) ? KO : OK );
 }
 
 void		test_strpbrk(t_functions * const tests)

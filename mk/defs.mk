@@ -5,7 +5,7 @@
 ## Login   <antoine.bache@epitech.net>
 ##
 ## Started on  Mon Feb 27 11:39:45 2017 Antoine Baché
-## Last update Mon Feb 27 11:39:57 2017 Antoine Baché
+## Last update Thu Mar 02 16:30:15 2017 troncy_l
 ##
 
 # Commands definitions
@@ -23,7 +23,7 @@ BENCH_DIR=	./bench/
 TEST_DIR=	./tests/
 
 # Compilation and link definitions
-AS=		nasm
+AS=		nasm -O0
 CC=		gcc
 C_VER=		c99
 ARCH=		x86_64

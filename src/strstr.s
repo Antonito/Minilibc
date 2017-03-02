@@ -6,9 +6,10 @@
 strstr:
 	xor rdx, rdx
 _strstr_haystack_loop_start:
-	cmp byte [rdi + rdx], 0
+	mov byte al, [rdi + rdx]
+	cmp al, 0
 	je _strstr_haystack_loop_end
-	cmp [rdi + rdx], rsi
+	cmp al, sil
 	je _strstr_needle_loop_init
 	inc rdx
 	jmp _strstr_haystack_loop_start
@@ -19,19 +20,21 @@ _strstr_haystack_loop_end:
 _strstr_needle_loop_init:
 	xor rcx, rcx
 _strstr_needle_loop_start:
-	cmp byte [rsi + rcx], 0
+	mov byte r9b, [rsi + rcx]
+	cmp r9b, 0x0			;check if we reach "needle" end
 	je _strstr_needle_loop_end
-	mov r9, [rdx + rcx]
-	cmp byte [rdi + r9], 0
+	mov r10, [rdx + rcx]
+	mov r11, [rdi + r10]		;actual char of "haystack"
+	mov byte r8b, [r11]
+	cmp r8b, 0			;check if we reach "haystack" end
 	je _strstr_needle_loop_end
-	mov r8b, [rdi + r9]
-	cmp byte r8b, [rsi, rcx]
-	jne _strstr_haystack_loop_end
+	cmp r8b, r9b
+	jne _strstr_haystack_loop_start
 	inc rcx
 	jmp _strstr_needle_loop_start
 _strstr_needle_loop_end:
 	mov rax, rdi
-	add rdi, [rdx + rcx]
+	add rax, rdx
 	ret
 	
 %elifidn __OUTPUT_FORMAT__, elf32
