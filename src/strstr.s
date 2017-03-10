@@ -4,18 +4,18 @@
 		global strstr
 
 strstr:
-	xor rdx, rdx			; set haystck counter to 0
+	mov rdx, -1			; set haystck counter to 0
 	cmp byte [rsi], 0
 	je _strstr_return_haystack
 	cmp byte [rdi], 0
 	je _strstr_haystack_loop_end
 _strstr_haystack_loop_start:
+        inc rdx
 	mov byte al, [rdi + rdx]	; get haystack char into al
 	cmp al, 0			; if we reach the end
 	je _strstr_haystack_loop_end	; the end, we did not find needle
 	cmp byte al, [rsi]		; if haystack[i] == needle[0]
 	je _strstr_needle_loop_init
-	inc rdx				; inc haystack counter
 	jmp _strstr_haystack_loop_start
 _strstr_haystack_loop_end:
 	xor rax, rax			; return haystack
