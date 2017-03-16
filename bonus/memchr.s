@@ -24,7 +24,25 @@ _memchr_not_found:
 		section .text
 		global memchr
 memchr:
-%warning "To code !"
+        push ebp
+        mov ebp, esp
+        mov edi, [ebp + 8]
+        mov esi, [ebp + 12]
+        mov edx, [ebp + 16]
+	xor ecx, ecx		; Set rcx to 0
+	xor eax, eax
+_memchr_loop_start:
+	cmp ecx, edx		; Did we reach the end ?
+	je _memchr_not_found
+	cmp [edi + ecx], esi
+	je _memchr_found
+	inc ecx
+	jmp _memchr_loop_start	; Loop
+_memchr_found:
+	mov eax, edi
+	add eax, ecx
+_memchr_not_found:
+        pop ebp
 	ret
 %else
 		%error "Architecture not supported"

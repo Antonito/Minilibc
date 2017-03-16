@@ -39,7 +39,41 @@ _strpbrk_accept_loop_end:
 		section .text
 		global strpbrk
 strpbrk:
-%warning "To code !"
+        push ebp
+        mov ebp, esp
+        mov edi, [ebp + 8]
+        mov esi, [ebp + 12]
+	xor edx, edx		; Set rdx to 0
+	cmp byte [edi], 0
+	je _strpbrk_s_loop_end
+	cmp byte [esi], 0
+	je _strpbrk_s_loop_end
+_strpbrk_s_loop_start:
+	cmp byte [edi + edx], 0
+	je _strpbrk_s_loop_end
+	jmp _strpbrk_accept_loop_init
+_strpbrk_s_loop_inc:
+	inc edx
+	jmp _strpbrk_s_loop_start
+_strpbrk_s_loop_end:
+	xor eax, eax		; Set return value
+        pop ebp
+	ret
+
+_strpbrk_accept_loop_init:
+	xor ecx, ecx		; Set rcx to 0
+_strpbrk_accept_loop_start:
+	cmp byte [esi + ecx], 0
+	je _strpbrk_s_loop_inc	; increment count (first loop) and continue
+	mov byte al, [edi + edx]
+	cmp byte al, [esi + ecx]
+	je _strpbrk_accept_loop_end
+	inc ecx
+	jmp _strpbrk_accept_loop_start
+_strpbrk_accept_loop_end:
+	mov eax, edi
+	add eax, edx
+        pop ebp
 	ret
 %else
 		%error "Architecture not supported"

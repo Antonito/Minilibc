@@ -51,8 +51,18 @@ _memcmp_loop_end_diff:
 _memcmp_loop_end_success:
 	xor eax, eax
 _memcmp_end:
-	pop ebp
-	ret
+        cmp eax, 0
+        jl _memcmp_lower
+        jg _memcmp_greater
+        jmp _memcmp_final_end
+_memcmp_lower:
+        mov eax, -1
+        jmp _memcmp_final_end
+_memcmp_greater:
+        mov eax, 1
+_memcmp_final_end:
+        pop ebp
+        ret
 %else
 		%error "Architecture not supported"
 %endif

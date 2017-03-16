@@ -43,7 +43,44 @@ _memmove_loop_end:
 		section .text
 		global memmove
 memmove:
-%warning "To code !"
+        push ebp
+        mov ebp, esp
+        mov edi, [ebp + 8]
+        mov esi, [ebp + 12]
+        mov edx, [ebp + 16]
+	cmp edx, 0
+	je _memmove_loop_end
+	cmp edi, esi
+	jl _memmove_cpy_forward	; dest < src
+
+_memmove_cpy_backward:
+	mov ecx, edx
+	dec ecx			; Last elem of array
+_memmove_backward_loop_start:
+	cmp ecx, 0
+	je _memmove_last_one	; We reached the end.
+	mov byte al, [esi + ecx]
+	mov byte [edi + ecx], al
+	dec ecx
+	jmp _memmove_backward_loop_start
+_memmove_last_one:
+	mov byte al, [esi + ecx]
+	mov byte [edi + ecx], al
+	jmp _memmove_loop_end
+
+_memmove_cpy_forward:
+	xor ecx, ecx		; Set rcx to 0
+_memmove_forward_loop_start:
+	cmp ecx, edx		; Did we reach the end ?
+	je _memmove_loop_end
+	mov byte al, [esi + ecx]
+	mov byte [edi + ecx], al ; Set current byte to desired value
+	inc ecx
+	jmp _memmove_forward_loop_start	; Loop
+
+_memmove_loop_end:
+	mov eax, edi		; We return a pointer to the array
+        pop ebp
 	ret
 %else
 		%error "Architecture not supported"
