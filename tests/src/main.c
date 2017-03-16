@@ -5,7 +5,7 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:44:12 2017 Antoine Baché
-** Last update Thu Mar  2 21:00:32 2017 Antoine Baché
+** Last update Thu Mar 16 12:37:47 2017 Antoine Baché
 */
 
 #define _GNU_SOURCE
@@ -50,7 +50,6 @@ static t_functions	tests[] =
     {NULL, (void *(*)())memcmp, NULL, NULL},
     {NULL, (void *(*)())strnlen, NULL, strings},
     {NULL, (void *(*)())write, NULL, NULL},
-    {NULL, (void *(*)())sleep, NULL, NULL},
     {NULL, (void *(*)())memfrob, NULL, NULL},
     {NULL, (void *(*)())exit, NULL, NULL},
     {NULL, (void *(*)())rawmemchr, NULL, NULL},
@@ -84,7 +83,7 @@ int			load_symbols(void * const file)
   static const char	*symbols[] =
     {"memcpy", "memmove", "memset", "strchr", "strcmp", "strlen",
      "strncmp", "rindex", "strcasecmp", "strstr", "strpbrk", "strcspn",
-     "memchr", "memcmp", "strnlen", "write", "sleep", "memfrob",
+     "memchr", "memcmp", "strnlen", "write", "memfrob",
      "exit", "rawmemchr",
      NULL};
 
@@ -140,7 +139,6 @@ int			main(int ac, char **av, char **env)
   test_memcmp(tests);
   test_strnlen(tests);
   test_write(tests);
-  test_sleep(tests);
   test_memfrob(tests);
   test_rawmemchr(tests);
   test_exit(tests);

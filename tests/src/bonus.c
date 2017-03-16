@@ -5,7 +5,7 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:43:34 2017 Antoine Baché
-** Last update Thu Mar  2 20:58:44 2017 Antoine Baché
+** Last update Thu Mar 16 12:38:13 2017 Antoine Baché
 */
 
 #define _GNU_SOURCE
@@ -115,18 +115,6 @@ void		test_write(t_functions * const tests)
   tests[WRITE].minilibc(1, "\n", 1);
   tests[WRITE].minilibc(1, str, 5);
   tests[WRITE].minilibc(1, "\n", 1);
-}
-
-void		test_sleep(t_functions * const tests)
-{
-  printf("sleep: Waiting 1sec [libc]\n");
-  tests[SLEEP].libc(1);
-  if (setjmp(jbuf) == 0)
-    {
-      printf("sleep: Waiting 1sec [minilibc]\n");
-      tests[SLEEP].minilibc(1);
-    }
-  printf("sleep: Done\n");
 }
 
 void		test_exit(t_functions * const tests)

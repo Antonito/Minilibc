@@ -5,7 +5,7 @@
 ## Login   <antoine.bache@epitech.net>
 ##
 ## Started on  Mon Feb 27 11:36:46 2017 Antoine Baché
-## Last update Mon Feb 27 11:36:59 2017 Antoine Baché
+## Last update Thu Mar 16 12:37:16 2017 Antoine Baché
 ##
 
 # Makefile dependencies directory
@@ -36,7 +36,6 @@ BONUS_FILES=	memchr.s	\
 		memcmp.s	\
 		memfrob.s	\
 		strnlen.s	\
-		sleep.s		\
 		syscall.s	\
 		rawmemchr.s
 
