@@ -5,7 +5,7 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:41:27 2017 Antoine Baché
-** Last update Thu Mar  2 20:41:14 2017 Antoine Baché
+** Last update Thu Mar 16 15:24:37 2017 troncy_l
 */
 
 #ifndef MINILIBC_TEST_H_
@@ -40,7 +40,6 @@ typedef enum	e_func_list
     MEMCMP,
     STRNLEN,
     WRITE,
-    SLEEP,
     MEMFROB,
     EXIT,
     RAWMEMCHR,
