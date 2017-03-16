@@ -5,7 +5,7 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:43:08 2017 Antoine Baché
-** Last update Thu Mar 16 20:23:22 2017 Antoine Baché
+** Last update Thu Mar 16 21:05:22 2017 Antoine Baché
 */
 
 #include <stdlib.h>
@@ -50,7 +50,7 @@ void		test_memmove(t_functions * const tests)
       printf("%s: Same %s\n", tests[MEMMOVE].name,
 	     memcmp(arr1, arr2, sizeof(arr1)) ? KO : OK);
       memmove(arr1, "(null)", 0);
-      tests[MEMMOVE].minilibc(arr2, "(null)", 0);
+      tests[MEMMOVE].minilibc(arr2, "yolooooo", 0);
       printf("%s: Extra %s\n", tests[MEMMOVE].name,
 	     memcmp(arr1, arr2, sizeof(arr1)) ? KO : OK);
     }
