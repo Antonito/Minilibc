@@ -5,7 +5,7 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:42:39 2017 Antoine Baché
-** Last update Thu Mar  2 20:27:00 2017 Antoine Baché
+** Last update Thu Mar 16 15:49:35 2017 Antoine Baché
 */
 
 #include <stdio.h>
@@ -14,14 +14,16 @@
 void		test_strstr(t_functions * const tests)
 {
   char		*haystack[] = {"Bonjour cacao j'aime les ...", "Toto",
-			       "Ceci est un test", "\0", "\0"};
-  char		*needle[] = {"cacao", "asd", "\0", "a", "\0"};
+			       "Ceci est un test", "\0", "\0", "Salutsalutsalutsalut",
+			       "z", "", "toto", NULL};
+  char		*needle[] = {"cacao", "asd", "\0", "a", "\0", "z",
+			     "Salutsalutsalutsalut", "\1", "toto", NULL};
   char		*res;
   char		*real_res;
   int		i;
 
   i = 0;
-  while (i < 5)
+  while (needle[i] || haystack[i])
     {
       if (setjmp(jbuf) == 0)
 	{
@@ -37,14 +39,14 @@ void		test_strstr(t_functions * const tests)
 
 void		test_strpbrk(t_functions * const tests)
 {
-  char		*s[] = {"0123456789ABCDEF", "AAB", "a", "\0"};
-  char		*reject[] = {"F5", "C", "\0", "\0"};
+  char		*s[] = {"0123456789ABCDEF", "AAB", "a", "\0", NULL};
+  char		*reject[] = {"F5", "C", "\0", "\0", NULL};
   char		*res;
   char		*real_res;
   int		i;
 
   i = 0;
-  while (i < 4)
+  while (s[i])
     {
       if (setjmp(jbuf) == 0)
 	{
@@ -60,14 +62,14 @@ void		test_strpbrk(t_functions * const tests)
 
 void		test_strcspn(t_functions * const tests)
 {
-  char		*s[] = {"0123456789ABCDEF", "ASDW", "a", "\0"};
-  char		*reject[] = {"45", "Q", "\0", "\0"};
+  char		*s[] = {"0123456789ABCDEF", "ASDW", "a", "\0", NULL};
+  char		*reject[] = {"45", "Q", "\0", "\0", NULL};
   size_t	res;
   size_t	real_res;
   int		i;
 
   i = 0;
-  while (i < 4)
+  while (s[i])
     {
       if (setjmp(jbuf) == 0)
 	{

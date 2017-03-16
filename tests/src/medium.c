@@ -5,7 +5,7 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:44:36 2017 Antoine Baché
-** Last update Thu Mar  2 20:56:12 2017 Antoine Baché
+** Last update Thu Mar 16 15:33:48 2017 Antoine Baché
 */
 
 #include <stdlib.h>
@@ -21,9 +21,11 @@ void		test_strcasecmp(t_functions * const tests)
   int		ret_libc;
   int		ret_minilibc;
   static char	*s1[] = {"Toto", "Tata", "wdsawdsawdsad\tasdad", "nice",
-			 "a", "A", "aaaw", "AaAaA\xFF", "\x00",  "a", NULL};
+			 "a", "A", "aaaw", "AaAaA\xFF", "\x00",  "a",
+			 "qwdsad", "AWdsa", "\0", "wdSa", NULL};
   static char	*s2[] = {"Tata", "Toto", "wdsawdsawdsad\0asdad", "nice",
-			 "A", "a", "aaaB", "aaaaa", "\xFF", "z", NULL};
+			 "A", "a", "aaaB", "aaaaa", "\xFF", "z",
+			 "wdsa", "awdsawdsa", "\0wdsa\0\1", "WDsA", NULL};
 
   i = 0;
   while (s1[i])
@@ -32,8 +34,8 @@ void		test_strcasecmp(t_functions * const tests)
 	{
 	  ret_libc = (uintptr_t)tests[STRCASECMP].libc(s1[i], s2[i]);
 	  ret_minilibc = (uintptr_t)tests[STRCASECMP].minilibc(s1[i], s2[i]);
-	  printf("%s: Libc[%d] MiniLibC[%d]: %s\n", tests[STRCASECMP].name,
-		 ret_libc, ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK);
+	  printf("%s: Libc[%d] MiniLibC[%d]: %s {\"%s\", \"%s\"}\n", tests[STRCASECMP].name,
+		 ret_libc, ret_minilibc, (ret_libc != ret_minilibc) ? KO : OK, s1[i], s2[i]);
 	}
       ++i;
     }
