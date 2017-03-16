@@ -4,6 +4,8 @@
 		global memmove
 
 memmove:
+	cmp rdx, 0
+	je _memmove_loop_end
 	cmp rdi, rsi
 	jl _memmove_cpy_forward	; dest < src
 

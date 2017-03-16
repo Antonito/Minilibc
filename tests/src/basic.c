@@ -5,7 +5,7 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:43:08 2017 Antoine Baché
-** Last update Thu Mar  2 21:45:33 2017 Antoine Baché
+** Last update Thu Mar 16 20:23:22 2017 Antoine Baché
 */
 
 #include <stdlib.h>
@@ -22,6 +22,7 @@ void		test_memmove(t_functions * const tests)
   char		arr2[258];
 
   memset(arr1, 0x54, sizeof(arr1));
+  memset(arr2, 0x54, sizeof(arr2));
   arr2[0] = 0x42;
   arr2[257] = 0x42;
   if (setjmp(jbuf) == 0)
@@ -43,6 +44,14 @@ void		test_memmove(t_functions * const tests)
       memmove(arr1, arr1 + 2, sizeof(arr1) - 2);
       tests[MEMMOVE].minilibc(arr2, arr2 + 2, sizeof(arr1) - 2);
       printf("%s: Forward %s\n", tests[MEMMOVE].name,
+	     memcmp(arr1, arr2, sizeof(arr1)) ? KO : OK);
+      memmove(arr1, arr1, sizeof(arr1));
+      tests[MEMMOVE].minilibc(arr2, arr2, sizeof(arr2));
+      printf("%s: Same %s\n", tests[MEMMOVE].name,
+	     memcmp(arr1, arr2, sizeof(arr1)) ? KO : OK);
+      memmove(arr1, "(null)", 0);
+      tests[MEMMOVE].minilibc(arr2, "(null)", 0);
+      printf("%s: Extra %s\n", tests[MEMMOVE].name,
 	     memcmp(arr1, arr2, sizeof(arr1)) ? KO : OK);
     }
   else
