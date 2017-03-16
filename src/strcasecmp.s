@@ -4,16 +4,19 @@
 		global strcasecmp
 
 strcasecmp:
-        xor rcx, rcx 
+        xor rcx, rcx		; Set counter to 0
+
 _strcasecmp_loop:
-        mov byte al, [rdi + rcx]
-        mov byte ah, [rsi + rcx]
-        cmp 0, al
+        mov byte al, [rdi + rcx] ; Get s1 character
+        mov byte ah, [rsi + rcx] ; Get s2 character
+
+        cmp 0, al		 ; Test null byte
         je _strcasecmp_loop_end
         cmp 0, ah
         je _strcasecmp_loop_end
-        or al, 32
-        or ah, 32
+
+	or al, 32		; Set to lowercase
+        or ah, 32		; Set to lowercase
         cmp al, ah
 
 _strcasecmp_loop_end:
