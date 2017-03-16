@@ -5,7 +5,11 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:42:39 2017 Antoine Baché
-** Last update Thu Mar 16 21:05:40 2017 troncy_l
+<<<<<<< HEAD
+** Last update Thu Mar 16 21:06:57 2017 troncy_l
+=======
+** Last update Thu Mar 16 20:24:44 2017 Antoine Baché
+>>>>>>> 1daf700ac7ad2625af99896dbd3cf8e0ff907482
 */
 
 #include <stdio.h>
