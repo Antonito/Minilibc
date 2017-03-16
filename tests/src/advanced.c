@@ -5,7 +5,7 @@
 ** Login   <antoine.bache@epitech.net>
 **
 ** Started on  Mon Feb 27 11:42:39 2017 Antoine Baché
-** Last update Thu Mar 16 21:04:17 2017 Antoine Baché
+** Last update Thu Mar 16 21:08:46 2017 Antoine Baché
 */
 
 #include <stdio.h>
@@ -15,9 +15,9 @@ void		test_strstr(t_functions * const tests)
 {
   char		*haystack[] = {"Bonjour cacao j'aime les ...", "Toto",
 			       "Ceci est un test", "\0", "\0", "Salutsalutsalutsalut",
-			       "z", "", "toto", "Hello darling...", NULL};
+			       "z", "", "toto", "Hello darling...", "Damn son where", NULL};
   char		*needle[] = {"cacao", "asd", "\0", "a", "\0", "z",
-			     "Salutsalutsalutsalut", "\1", "toto", "darling", NULL};
+			     "Salutsalutsalutsalut", "\1", "toto", "darling", "son", NULL};
   char		*res;
   char		*real_res;
   int		i;
