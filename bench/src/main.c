@@ -3,7 +3,7 @@
 #include <string.h>
 #include <strings.h>
 
-void *file = dlopen("./libminilibc.so", RTLD_NOW);
+void *file = dlopen("./libasm.so", RTLD_NOW);
 
 char strlen_str[] = "This literal is a test for (mini)libc's strlen"
                     "function.\n";
